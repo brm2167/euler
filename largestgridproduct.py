@@ -18,6 +18,38 @@ def largest_product_grid(length: int, grid: list) -> int:
                 if product > largest_product:
                     largest_product = product
 
+            #Up-down
+            if i < len(grid) - length + 1:
+                product: int = 1
+
+                for k in range(i, i + length):
+                    product *= grid[k][j]
+
+                if product > largest_product:
+                    largest_product = product
+
+            #Up-right diagonal
+            if i + 1 >= length and j < len(grid) - length + 1:
+                product: int = 1
+
+                for k in range(length):
+                    product *= grid[i - k][j + k]
+
+                if product > largest_product:
+                    largest_product = product
+
+            #Down-right diagonal
+            if i < len(grid) - length + 1 and j < len(grid) - length + 1:
+                product: int = 1
+
+                for k in range(length):
+                    product *= grid[i + k][j + k]
+
+                if product > largest_product:
+                    largest_product = product
+
+    return largest_product
+
 def main():
     with open("problem11grid.txt") as file:
         grid: list = []
